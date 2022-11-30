@@ -2,15 +2,17 @@ package com.w2m.heroes.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
-
 @Value
+@RequiredArgsConstructor
 @Builder
-public class HeroDto {
-
-   Long id;
+public class LoginRequest {
 
    @NotBlank
-   String name;
+   String username;
+
+   @NotBlank
+   String password;
 }
