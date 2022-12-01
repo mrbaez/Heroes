@@ -21,7 +21,6 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 
-//No uso @WebMvcTest dado que por la configuración de seguridad necesita algunos servicios que no se inyectan.
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(username="test", password = "test", authorities = {"ADMIN", "USER"})
