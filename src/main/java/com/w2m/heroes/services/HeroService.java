@@ -5,6 +5,9 @@ import static java.util.Objects.isNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.w2m.heroes.dto.HeroDto;
@@ -30,6 +33,7 @@ public class HeroService {
       return heroMapper.toDto(heroRepository.save(hero));
    }
 
+   @CachePut(key = "#id")
    public HeroDto update(final long id, final HeroDto heroDto) {
       log.info("updating hero with id: {}", id);
       final Hero hero = heroRepository.findById(id).orElseThrow(() -> new HeroNotFoundException(id));
@@ -37,6 +41,7 @@ public class HeroService {
       return heroMapper.toDto(updated);
    }
 
+   @CacheEvict(key = "#id")
    public HeroDto delete(final long id) {
       log.info("trying to delete hero {}", id);
       final Hero hero = heroRepository.findById(id).orElseThrow(() -> new HeroNotFoundException(id));
@@ -54,6 +59,7 @@ public class HeroService {
       return heroMapper.toDto(hero);
    }
 
+   @Cacheable(key = "#id")
    public List<HeroDto> findByName(final String name) {
       log.info("finding heroes with name: {}", name);
       if (isNull(name) || name.isBlank()) {

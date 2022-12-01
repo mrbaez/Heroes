@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.w2m.heroes.annotations.CustomTimed;
 import com.w2m.heroes.dto.HeroDto;
 import com.w2m.heroes.services.HeroService;
 
@@ -48,6 +49,7 @@ public class HeroController {
 
    @PreAuthorize("hasAuthority('USER')")
    @GetMapping(value = "/{id}")
+   @CustomTimed
    HeroDto findById(@PathVariable(value = "id") long id) {
       return heroService.findById(id);
    }
