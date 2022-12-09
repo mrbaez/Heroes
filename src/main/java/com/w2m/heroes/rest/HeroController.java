@@ -36,14 +36,14 @@ public class HeroController {
    @PreAuthorize("hasAuthority('ADMIN')")
    @PostMapping
    ResponseEntity<HeroDto> create(@Valid @RequestBody HeroDto hero) {
-      final HeroDto created = heroService.create(hero);
+      final var created = heroService.create(hero);
       return ResponseEntity.status(HttpStatus.CREATED).body(created);
    }
 
    @PreAuthorize("hasAuthority('ADMIN')")
    @PutMapping("/{id}")
    ResponseEntity<HeroDto> update(@PathVariable(value = "id") long id, @Valid @RequestBody HeroDto hero) {
-      HeroDto updated = heroService.update(id, hero);
+      final var updated = heroService.update(id, hero);
       return ResponseEntity.status(HttpStatus.OK).body(updated);
    }
 
